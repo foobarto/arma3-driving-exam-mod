@@ -1,0 +1,293 @@
+version=12;
+class Mission
+{
+	addOns[]=
+	{
+		"A3_Characters_F_Civil",
+		"a3_map_altis"
+	};
+	addOnsAuto[]=
+	{
+		"A3_Characters_F_Civil",
+		"a3_map_altis"
+	};
+	randomSeed=3221428;
+	class Intel
+	{
+		timeOfChanges=1800.0002;
+		startWeather=0.30000001;
+		startWind=0.1;
+		startWaves=0.1;
+		forecastWeather=0.30000001;
+		forecastWind=0.1;
+		forecastWaves=0.1;
+		forecastLightnings=0.1;
+		year=2035;
+		month=6;
+		day=24;
+		hour=12;
+		minute=0;
+		startFogDecay=0.013;
+		forecastFogDecay=0.013;
+	};
+	class Groups
+	{
+		items=1;
+		class Item0
+		{
+			side="CIV";
+			class Vehicles
+			{
+				items=6;
+				class Item0
+				{
+					position[]={14113.723,17.161467,16438.811};
+					special="NONE";
+					id=0;
+					side="CIV";
+					vehicle="C_man_1";
+					player="PLAYER COMMANDER";
+					leader=1;
+					skill=0.60000002;
+				};
+				class Item1
+				{
+					position[]={14113.101,17.160999,16438.676};
+					id=1;
+					side="CIV";
+					vehicle="C_man_1";
+					player="PLAY CDG";
+					skill=0.60000002;
+				};
+				class Item2
+				{
+					position[]={14112.52,17.16095,16438.402};
+					id=2;
+					side="CIV";
+					vehicle="C_man_1";
+					player="PLAY CDG";
+					skill=0.60000002;
+				};
+				class Item3
+				{
+					position[]={14112.48,17.161314,16438.246};
+					id=3;
+					side="CIV";
+					vehicle="C_man_1";
+					player="PLAY CDG";
+					skill=0.60000002;
+				};
+				class Item4
+				{
+					position[]={14112.055,17.161163,16438.092};
+					id=4;
+					side="CIV";
+					vehicle="C_man_1";
+					player="PLAY CDG";
+					skill=0.60000002;
+				};
+				class Item5
+				{
+					position[]={14112.132,17.160732,16438.291};
+					id=5;
+					side="CIV";
+					vehicle="C_man_1";
+					player="PLAY CDG";
+					skill=0.60000002;
+				};
+			};
+		};
+	};
+	class Markers
+	{
+		items=16;
+		class Item0
+		{
+			position[]={14116.593,17.177002,16439.008};
+			name="car_examiner1";
+			text="Drivers Licence Exam";
+			type="c_car";
+			colorName="ColorBlue";
+		};
+		class Item1
+		{
+			position[]={14116.402,17.170809,16443.121};
+			name="car_license_exam_spawn";
+			type="Empty";
+		};
+		class Item2
+		{
+			position[]={14137.477,17.209969,16452.719};
+			name="car_license_exam1";
+			type="Empty";
+		};
+		class Item3
+		{
+			position[]={14177.606,16.889898,16464.859};
+			name="car_license_exam2";
+			type="Empty";
+		};
+		class Item4
+		{
+			position[]={14205.017,16.854193,16479.871};
+			name="car_license_exam3";
+			type="Empty";
+		};
+		class Item5
+		{
+			position[]={14188.84,16.647167,16498.051};
+			name="car_license_exam4";
+			type="Empty";
+		};
+		class Item6
+		{
+			position[]={14167.99,16.962866,16471.424};
+			name="car_license_exam5";
+			type="Empty";
+		};
+		class Item7
+		{
+			position[]={14144.254,16.886562,16474.82};
+			name="car_license_exam6";
+			type="Empty";
+		};
+		class Item8
+		{
+			position[]={14172.498,16.921343,16495.5};
+			name="car_license_exam7";
+			type="Empty";
+		};
+		class Item9
+		{
+			position[]={14164.328,17.093092,16506.176};
+			name="car_license_exam8";
+			type="Empty";
+		};
+		class Item10
+		{
+			position[]={14126.469,16.19659,16491.111};
+			name="car_license_exam9";
+			type="Empty";
+		};
+		class Item11
+		{
+			position[]={14130.083,17.032993,16468.375};
+			name="car_license_exam10";
+			type="Empty";
+		};
+		class Item12
+		{
+			position[]={14108.57,16.520298,16470.82};
+			name="car_license_exam11";
+			type="Empty";
+		};
+		class Item13
+		{
+			position[]={14089.279,16.830524,16446.082};
+			name="car_license_exam12";
+			type="Empty";
+		};
+		class Item14
+		{
+			position[]={14113.322,17.151703,16446.221};
+			name="car_license_exam13";
+			type="Empty";
+		};
+		class Item15
+		{
+			position[]={14112.792,17.160904,16438.557};
+			name="respawn_civ";
+			type="Empty";
+		};
+	};
+};
+class Intro
+{
+	addOns[]=
+	{
+		"a3_map_altis"
+	};
+	addOnsAuto[]=
+	{
+		"a3_map_altis"
+	};
+	randomSeed=11889892;
+	class Intel
+	{
+		timeOfChanges=1800.0002;
+		startWeather=0.30000001;
+		startWind=0.1;
+		startWaves=0.1;
+		forecastWeather=0.30000001;
+		forecastWind=0.1;
+		forecastWaves=0.1;
+		forecastLightnings=0.1;
+		year=2035;
+		month=6;
+		day=24;
+		hour=12;
+		minute=0;
+		startFogDecay=0.013;
+		forecastFogDecay=0.013;
+	};
+};
+class OutroWin
+{
+	addOns[]=
+	{
+		"a3_map_altis"
+	};
+	addOnsAuto[]=
+	{
+		"a3_map_altis"
+	};
+	randomSeed=13731018;
+	class Intel
+	{
+		timeOfChanges=1800.0002;
+		startWeather=0.30000001;
+		startWind=0.1;
+		startWaves=0.1;
+		forecastWeather=0.30000001;
+		forecastWind=0.1;
+		forecastWaves=0.1;
+		forecastLightnings=0.1;
+		year=2035;
+		month=6;
+		day=24;
+		hour=12;
+		minute=0;
+		startFogDecay=0.013;
+		forecastFogDecay=0.013;
+	};
+};
+class OutroLoose
+{
+	addOns[]=
+	{
+		"a3_map_altis"
+	};
+	addOnsAuto[]=
+	{
+		"a3_map_altis"
+	};
+	randomSeed=12501625;
+	class Intel
+	{
+		timeOfChanges=1800.0002;
+		startWeather=0.30000001;
+		startWind=0.1;
+		startWaves=0.1;
+		forecastWeather=0.30000001;
+		forecastWind=0.1;
+		forecastWaves=0.1;
+		forecastLightnings=0.1;
+		year=2035;
+		month=6;
+		day=24;
+		hour=12;
+		minute=0;
+		startFogDecay=0.013;
+		forecastFogDecay=0.013;
+	};
+};

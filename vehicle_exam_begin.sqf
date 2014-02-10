@@ -1,18 +1,17 @@
-private ["_exam_type", "_exam_vehicle", "_exam_timeout", "_exam_vehicle_dir", "_examinee", "_examiner_pos"];
-_exam_type = _this select 3 select 0;
-_exam_vehicle = _this select 3 select 1;
-_exam_timeout = _this select 3 select 2; 
-_exam_vehicle_dir = _this select 3 select 3;
-_checkpoint_radius = _this select 3 select 4;
-_examiner_pos = _this select 3 select 4;
-_examinee = _this select 1;
-
 
 if(!isServer) then {
-	hint "I'm here!";
 	vehicle_exam_begin_flag = _this;
 	publicVariableServer "vehicle_exam_begin_flag";
 } else {
+	private ["_exam_type", "_exam_vehicle", "_exam_timeout", "_exam_vehicle_dir", "_examinee", "_examiner_pos"];
+
+	_exam_type = _this select 3 select 0;
+	_exam_vehicle = _this select 3 select 1;
+	_exam_timeout = _this select 3 select 2; 
+	_exam_vehicle_dir = _this select 3 select 3;
+	_checkpoint_radius = _this select 3 select 4;
+	_examiner_pos = _this select 3 select 4;
+	_examinee = _this select 1;
 
 	switch ([_exam_type, "examinee"] call getVehExamData) do {
 		case objNull:
@@ -24,10 +23,11 @@ if(!isServer) then {
 			[
 				_examinee, 
 				_exam_veh, 
-				["Cancel Exam", (format ["[""%1"", %2, 'Giving up eh?'] call vehicle_exam_cancel;", _exam_type, _examiner_pos]), [], 0, true, true, "GetOut"]
+				["Cancel Exam", (format ["[""%1"", %2, 'Giving up eh?'] call vehicleExam_fnc_finish;", _exam_type, _examiner_pos]), [], 0, true, true, "GetOut"]
 			] call vehicleExamAddAction;
 			
-			_examinee moveInDriver _exam_veh;		
+			_examinee action ["GetInDriver", _exam_veh]; // this works on dedicated server
+			_examinee moveInDriver _exam_veh;  // this works locally
 
 			[_exam_type, "veh", _exam_veh] call setVehExamData;
 			[_exam_type, "examinee", _examinee] call setVehExamData;
@@ -38,7 +38,7 @@ if(!isServer) then {
 			_timeout setTriggerStatements [
 				"true", 
 				format ["
-					[""%1"", %2, 'You have to be quicker than that!'] call vehicle_exam_cancel;
+					[""%1"", %2, 'You have to be quicker than that!'] call vehicleExam_fnc_finish;
 					", _exam_type, _examiner_pos
 				],
 				""
@@ -47,7 +47,7 @@ if(!isServer) then {
 			_bad_driving setTriggerStatements [
 				format ["_veh = [""%1"", ""veh""] call getVehExamData; !isOnRoad position _veh || (damage _veh) > 0.1", _exam_type],
 				format ["
-						[""%1"", %2, ""You won't pass being reckless like that!""] call vehicle_exam_cancel;
+						[""%1"", %2, ""You won't pass being reckless like that!""] call vehicleExam_fnc_finish;
 						_examinee = [%1, ""examinee""] call getVehExamData;
 					", 
 					_exam_type, _examiner_pos

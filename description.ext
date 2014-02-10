@@ -1,0 +1,32 @@
+author = "foobarto";
+onLoadName = "Driving License Exam";
+onLoadMission = "Attempt to pass the driving license exam";
+joinUnassigned = 1;
+respawn = BASE;
+respawndelay = 10;
+disabledAI = true;
+disableChannels[]={0,1,2};
+
+class Header
+{
+	gameType = RPG;
+	minPlayers = 1;
+	maxPlayers = 75;
+};
+
+
+class CfgFunctions
+{
+	class vehicleExam
+	{
+
+		class ClientFuns
+		{			
+			class addAction { file = "vehicle_add_action.sqf";};
+			class hint { file = "vehicle_hint.sqf";};
+			class begin { file = "vehicle_exam_begin.sqf"; };
+			class finish { file = "vehicle_exam_finish.sqf"; };
+			class stopVehicle { file = "vehicle_exam_stopveh.sqf"; };
+		};		
+	};
+};

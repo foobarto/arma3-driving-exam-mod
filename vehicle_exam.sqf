@@ -1,23 +1,24 @@
 
 
 receiveVehicleExamHint = {
-    hint str _this;
+    hint _this;
 };
 
 addActionVehicleExam = {
+    waitUntil {!isNull player};     
     private ["_obj", "_args"];
     _obj = _this select 0;
     _args = _this select 1;    
     if(isNull _obj) then {
         hint "Hey obj not found!";
     } else {
-        hint str _obj;
         _obj addAction _args;
     };
+    
 };
 
 
-if (!isDedicated) exitWith {};
+if (!isServer) exitWith {};
 
 _exam_type = _this select 0;
 _examiner_marker = _this select 1;
@@ -108,7 +109,7 @@ sendVehicleExamHint = {
     private ["_target", "_msg"];
     _target = _this select 0;
     _msg = _this select 1;
-    [{hint _msg;}, "BIS_fnc_spawn", _target, false] call BIS_fnc_MP;
+    [_msg, "receiveVehicleExamHint", _target, false] call BIS_fnc_MP;
 };
 
 vehicleExamAddGlobalAction = {
@@ -176,7 +177,8 @@ _add_checkpoint = {
                         _current = _checkpoints select _current_idx;                                  
                         if( str _current == str thistrigger) then {                            
                             _next_idx = _current_idx +1;
-                            [""%1"", ""current_checkpoint"", _next_idx] call setVehExamData;                        
+                            [""%1"", ""current_checkpoint"", _next_idx] call setVehExamData;    
+                            [_examinee, ('Checkpoint '+ str (_current_idx +1) + '/' +  str (count _checkpoints))] call sendVehicleExamHint;                    
                         };        
                     };            
                 };
@@ -186,7 +188,7 @@ _add_checkpoint = {
         format ["
          _checkpoints = [""%1"", ""checkpoints""] call getVehExamData;
          _current_idx = [""%1"", ""current_checkpoint""] call getVehExamData;
-         if ((count _checkpoints) <= _current_idx) then {            
+         if ((count _checkpoints) <= (_current_idx+1)) then {            
             [""%1"", %2] call vehicle_exam_finished;
          };
          ", _exam_type, _examiner_pos]

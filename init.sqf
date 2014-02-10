@@ -8,5 +8,10 @@
 	"C_Offroad_01_F", // exam vehicle
 	80, // exam vehicle spawn direction
 	50, // max time to finish exam
-	6  // checkpoint size
+	4  // checkpoint size
 ] execVM "vehicle_exam.sqf";
+
+if(!isNull player) then {
+	player setPos (getMarkerPos "player_spawn");
+	[player] join grpNull;
+};

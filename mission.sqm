@@ -41,27 +41,27 @@ class Mission
 				items=6;
 				class Item0
 				{
-					position[]={14113.723,17.161467,16438.811};
+					position[]={8417.3682,111.34362,25115.826};
 					special="NONE";
 					id=0;
 					side="CIV";
 					vehicle="C_man_1";
-					player="PLAYER COMMANDER";
+					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
 				};
 				class Item1
 				{
-					position[]={14113.101,17.160999,16438.676};
+					position[]={8416.5908,111.39629,25113.754};
 					id=1;
 					side="CIV";
 					vehicle="C_man_1";
-					player="PLAY CDG";
+					player="PLAYER COMMANDER";
 					skill=0.60000002;
 				};
 				class Item2
 				{
-					position[]={14112.52,17.16095,16438.402};
+					position[]={8416.166,111.22112,25117.902};
 					id=2;
 					side="CIV";
 					vehicle="C_man_1";
@@ -70,7 +70,8 @@ class Mission
 				};
 				class Item3
 				{
-					position[]={14112.48,17.161314,16438.246};
+					position[]={8413.4883,111.12997,25114.99};
+					special="NONE";
 					id=3;
 					side="CIV";
 					vehicle="C_man_1";
@@ -79,7 +80,7 @@ class Mission
 				};
 				class Item4
 				{
-					position[]={14112.055,17.161163,16438.092};
+					position[]={8413.1016,110.94907,25117.707};
 					id=4;
 					side="CIV";
 					vehicle="C_man_1";
@@ -88,7 +89,7 @@ class Mission
 				};
 				class Item5
 				{
-					position[]={14112.132,17.160732,16438.291};
+					position[]={8414.3818,110.9968,25118.604};
 					id=5;
 					side="CIV";
 					vehicle="C_man_1";
@@ -100,7 +101,7 @@ class Mission
 	};
 	class Markers
 	{
-		items=16;
+		items=17;
 		class Item0
 		{
 			position[]={14116.593,17.177002,16439.008};
@@ -195,8 +196,14 @@ class Mission
 		};
 		class Item15
 		{
-			position[]={14112.792,17.160904,16438.557};
+			position[]={8414.9639,111.34189,25115.148};
 			name="respawn_civ";
+			type="Empty";
+		};
+		class Item16
+		{
+			position[]={14111.47,17.160772,16437.945};
+			name="player_spawn";
 			type="Empty";
 		};
 	};

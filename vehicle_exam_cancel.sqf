@@ -1,6 +1,7 @@
 
 _exam_type = _this select 0;
 _examiner_pos = _this select 1;
+_msg = _this select 2;
 _examinee = [_exam_type, "examinee"] call getVehExamData;
 _exam_veh = [_exam_type, "veh"] call getVehExamData;
 
@@ -18,5 +19,5 @@ _triggers = [_exam_type, "triggers"] call getVehExamData;
 } forEach (_triggers);
 [_exam_type, "triggers", []] call setVehExamData;
 
-[_examinee, "Better luck next time."] call sendVehicleExamHint;
+[_examinee, _msg] call sendVehicleExamHint;
 [_exam_type, "examinee", objNull] call setVehExamData;

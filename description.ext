@@ -17,16 +17,5 @@ class Header
 
 class CfgFunctions
 {
-	class vehicleExam
-	{
-
-		class ClientFuns
-		{			
-			class addAction { file = "vehicle_add_action.sqf";};
-			class hint { file = "vehicle_hint.sqf";};
-			class begin { file = "vehicle_exam_begin.sqf"; };
-			class finish { file = "vehicle_exam_finish.sqf"; };
-			class stopVehicle { file = "vehicle_exam_stopveh.sqf"; };
-		};		
-	};
+        #include "vehexam/functions.hpp";
 };

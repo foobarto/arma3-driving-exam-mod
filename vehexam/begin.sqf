@@ -23,44 +23,47 @@ if(!isServer) then {
 			[
 				_examinee, 
 				_exam_veh, 
-				["Cancel Exam", (format ["[""%1"", %2, 'Giving up eh?'] call vehicleExam_fnc_finish;", _exam_type, _examiner_pos]), [], 0, true, true, "GetOut"]
+				[
+                                    "Cancel Exam",
+                                    (format ["[""%1"", %2, 'Giving up eh?'] call vehexam_fnc_finish;",
+                                    _exam_type, _examiner_pos]), [], 0, true, true, "GetOut"]
 			] call vehicleExamAddAction;
 			
 			_examinee action ["GetInDriver", _exam_veh]; // this works on dedicated server
 			_examinee moveInDriver _exam_veh;  // this works locally
 
-			[_exam_type, "veh", _exam_veh] call setVehExamData;
-			[_exam_type, "examinee", _examinee] call setVehExamData;
-			[_examinee, "Good luck!"] call sendVehicleExamHint;
+			[_exam_type, "veh", _exam_veh] call vehexam_fnc_set;
+			[_exam_type, "examinee", _examinee] call vehexam_fnc_set;
+			[_examinee, "Good luck!"] call vehexam_fnc_hint;
 			
 			_timeout = createTrigger ["EmptyDetector", [0,0,0]];
 			_timeout setTriggerTimeout [_exam_timeout, _exam_timeout, _exam_timeout, false];
 			_timeout setTriggerStatements [
 				"true", 
 				format ["
-					[""%1"", %2, 'You have to be quicker than that!'] call vehicleExam_fnc_finish;
+					[""%1"", %2, 'You have to be quicker than that!'] call vehexam_fnc_finish;
 					", _exam_type, _examiner_pos
 				],
 				""
 			];
 			_bad_driving = createTrigger ["EmptyDetector", [0,0,0]];
 			_bad_driving setTriggerStatements [
-				format ["_veh = [""%1"", ""veh""] call getVehExamData; !isOnRoad position _veh || (damage _veh) > 0.1", _exam_type],
+				format ["_veh = [""%1"", ""veh""] call vehexam_fnc_get; !isOnRoad position _veh || (damage _veh) > 0.1", _exam_type],
 				format ["
-						[""%1"", %2, ""You won't pass being reckless like that!""] call vehicleExam_fnc_finish;
-						_examinee = [%1, ""examinee""] call getVehExamData;
+						[""%1"", %2, ""You won't pass being reckless like that!""] call vehexam_fnc_finish;
+						_examinee = [%1, ""examinee""] call vehexam_fnc_get;
 					", 
 					_exam_type, _examiner_pos
 				],
 				""
 			];
-			[_exam_type, "triggers", [_timeout, _bad_driving]] call setVehExamData;								
-			[_exam_type, "current_checkpoint", 0] call setVehExamData;
+			[_exam_type, "triggers", [_timeout, _bad_driving]] call vehexam_fnc_set;								
+			[_exam_type, "current_checkpoint", 0] call vehexam_fnc_set;
 		};
 
 		default
 		{
-			[_examinee, "Sorry but someone else is doing the exam right now..."] call sendVehicleExamHint;
+			[_examinee, "Sorry but someone else is doing the exam right now..."] call vehexam_fnc_hint;
 		};
 	};
 };

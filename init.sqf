@@ -9,9 +9,14 @@
 	80, // exam vehicle spawn direction
 	50, // max time to finish exam
 	4  // checkpoint size
-] execVM "vehicle_exam.sqf";
+] spawnVM vehexam_fnc_setup;
+
+playableGroup join grpNull;
 
 if(!isNull player) then {
 	player setPos (getMarkerPos "player_spawn");
-	[player] join grpNull;
+        player addEventHandler ["respawn", {
+               player setPos (getMarkerPos, "player_spawn");
+        }];
+        // todo: disconnect - move NPC back to the 'island' ;)
 };

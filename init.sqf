@@ -8,7 +8,10 @@
 	"C_Offroad_01_F", // exam vehicle
 	80, // exam vehicle spawn direction
 	50, // max time to finish exam
-	4  // checkpoint size
+	4,  // checkpoint size
+        // callbacks:
+        nil, // success callback in form of [function, arguments]
+        nil // failure callback in form of [function, arguments]
 ] spawnVM vehexam_fnc_setup;
 
 playableGroup join grpNull;

@@ -17,7 +17,11 @@ if(!isServer) then {
 		case objNull:
 		{			
 			private ["_exam_veh", "_timeout", "_bad_driving", "_add_more_checkpoints"];
-			_exam_veh = createVehicle [_exam_vehicle, getMarkerPos (format ["%1_spawn", _exam_type]), [], 0, "NONE"];
+			_exam_veh = createVehicle [
+                                  _exam_vehicle,
+                                  getMarkerPos (format ["%1_spawn", _exam_type]),
+                                  [], 0, "NONE"
+                        ];
 			_exam_veh lock true;
 			_exam_veh setDir _exam_vehicle_dir;
 			[
@@ -26,8 +30,10 @@ if(!isServer) then {
 				[
                                     "Cancel Exam",
                                     (format ["[""%1"", %2, 'Giving up eh?'] call vehexam_fnc_finish;",
-                                    _exam_type, _examiner_pos]), [], 0, true, true, "GetOut"]
-			] call vehicleExamAddAction;
+                                    _exam_type, _examiner_pos]), [], 0, true, true, "GetOut"
+                                ],
+                                _examinee, false
+			] call vehexam_fnc_addAction;
 			
 			_examinee action ["GetInDriver", _exam_veh]; // this works on dedicated server
 			_examinee moveInDriver _exam_veh;  // this works locally
@@ -41,7 +47,12 @@ if(!isServer) then {
 			_timeout setTriggerStatements [
 				"true", 
 				format ["
-					[""%1"", %2, 'You have to be quicker than that!'] call vehexam_fnc_finish;
+                                       _callback = ['%1', 'failure_callback'] call vehexam_fnc_get;
+					[
+                                               '%1', %2,
+                                               'You have to be quicker than that!',
+                                               _callback
+                                        ] call vehexam_fnc_finish;
 					", _exam_type, _examiner_pos
 				],
 				""
@@ -50,8 +61,13 @@ if(!isServer) then {
 			_bad_driving setTriggerStatements [
 				format ["_veh = [""%1"", ""veh""] call vehexam_fnc_get; !isOnRoad position _veh || (damage _veh) > 0.1", _exam_type],
 				format ["
-						[""%1"", %2, ""You won't pass being reckless like that!""] call vehexam_fnc_finish;
-						_examinee = [%1, ""examinee""] call vehexam_fnc_get;
+                                       _callback = ['%1', 'failure_callback'] call vehexam_fnc_get;                                
+         				[
+                                                '%1', %2,
+                                                ""You won't pass being reckless like that!"",
+                                                _callback
+                                        ] call vehexam_fnc_finish;
+					_examinee = ['%1', ""examinee""] call vehexam_fnc_get;
 					", 
 					_exam_type, _examiner_pos
 				],

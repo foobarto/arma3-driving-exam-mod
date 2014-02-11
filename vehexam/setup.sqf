@@ -11,13 +11,16 @@ _exam_vehicle = _this select 4;
 _exam_vehicle_dir = _this select 5;
 _exam_timeout = _this select 6;
 _checkpoint_radius = _this select 7;
-
+_success_callback = _this select 8;
+_failure_callback = _this select 9;
 
 [_exam_type, "examinee", objNull] call vehexam_fnc_set;
 [_exam_type, "checkpoints", []] call vehexam_fnc_set;
 [_exam_type, "triggers", []] call vehexam_fnc_set;
 [_exam_type, "veh", objNull] call vehexam_fnc_set;
 [_exam_type, "current_checkpoint", 0] call vehexam_fnc_set;
+[_exam_type, "success_callback", _success_callback] call vehexam_fnc_set;
+[_exam_type, "failure_callback", _failure_callback] call vehexam_fnc_set;
 
 _examiner = leader ([_examiner_pos, _examiner_side, [_examiner_model]] call BIS_fnc_spawnGroup);
 _examiner allowDamage false;
@@ -69,8 +72,9 @@ _add_checkpoint = {
         format ["
          _checkpoints = [""%1"", ""checkpoints""] call vehexam_fnc_get;
          _current_idx = [""%1"", ""current_checkpoint""] call vehexam_fnc_get;
-         if ((count _checkpoints) <= (_current_idx+1)) then {            
-            [""%1"", %2, 'You have passed!'] call vehexam_fnc_finish;
+         if ((count _checkpoints) <= (_current_idx+1)) then {
+            _callback = ['%1', "success_callback"] call vehexam_fnc_get;
+            [""%1"", %2, 'You have passed!', _callback] call vehexam_fnc_finish;
          };
          ", _exam_type, _examiner_pos]
     ];

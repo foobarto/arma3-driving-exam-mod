@@ -17,5 +17,5 @@ class Header
 
 class CfgFunctions
 {
-        #include "vehexam/functions.hpp";
+        #include "vehexam\functions.hpp"
 };

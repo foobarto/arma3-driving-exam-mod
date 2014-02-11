@@ -33,14 +33,8 @@ _examiner allowDamage false;
 ] call vehicleExamAddGlobalAction;
 */
 
-[
-    _examiner, 
-    [
-        "Begin Exam",
-        "call vehexam_fnc_begin;",
-        [_exam_type, _exam_vehicle, _exam_timeout, _exam_vehicle_dir, _examiner_pos, _checkpoint_radius]
-    ],
-    true, true
+[_examiner, 
+ ["Begin Exam", "call vehexam_fnc_begin;", [_exam_type, _exam_vehicle, _exam_timeout, _exam_vehicle_dir, _examiner_pos, _checkpoint_radius]]
 ] call vehexam_fnc_addAction;
 
 _add_checkpoint = { 
@@ -73,7 +67,7 @@ _add_checkpoint = {
          _checkpoints = [""%1"", ""checkpoints""] call vehexam_fnc_get;
          _current_idx = [""%1"", ""current_checkpoint""] call vehexam_fnc_get;
          if ((count _checkpoints) <= (_current_idx+1)) then {
-            _callback = ['%1', "success_callback"] call vehexam_fnc_get;
+            _callback = ['%1', 'success_callback'] call vehexam_fnc_get;
             [""%1"", %2, 'You have passed!', _callback] call vehexam_fnc_finish;
          };
          ", _exam_type, _examiner_pos]

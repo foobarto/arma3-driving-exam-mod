@@ -13,7 +13,7 @@ if(!isServer) then {
 	_examiner_pos = _this select 3 select 4;
 	_examinee = _this select 1;
 
-	switch ([_exam_type, "examinee"] call getVehExamData) do {
+	switch ([_exam_type, "examinee"] call vehexam_fnc_get) do {
 		case objNull:
 		{			
 			private ["_exam_veh", "_timeout", "_bad_driving", "_add_more_checkpoints"];
@@ -24,15 +24,15 @@ if(!isServer) then {
                         ];
 			_exam_veh lock true;
 			_exam_veh setDir _exam_vehicle_dir;
-			[
-				_examinee, 
+			[_exam_veh, "", "", _examinee] call vehexam_fnc_addAction;
+			[				
 				_exam_veh, 
 				[
-                                    "Cancel Exam",
-                                    (format ["[""%1"", %2, 'Giving up eh?'] call vehexam_fnc_finish;",
-                                    _exam_type, _examiner_pos]), [], 0, true, true, "GetOut"
-                                ],
-                                _examinee, false
+                    "Cancel Exam",
+                    (format ["_callback = ['%1', 'failure_callback'] call vehexam_fnc_get; [""%1"", %2, 'Giving up eh?', _callback] call vehexam_fnc_finish;",
+                    _exam_type, _examiner_pos]), [], 0, true, true, "GetOut"
+                ],
+             	_examinee
 			] call vehexam_fnc_addAction;
 			
 			_examinee action ["GetInDriver", _exam_veh]; // this works on dedicated server
@@ -47,12 +47,12 @@ if(!isServer) then {
 			_timeout setTriggerStatements [
 				"true", 
 				format ["
-                                       _callback = ['%1', 'failure_callback'] call vehexam_fnc_get;
-					[
-                                               '%1', %2,
-                                               'You have to be quicker than that!',
-                                               _callback
-                                        ] call vehexam_fnc_finish;
+                            _callback = ['%1', 'failure_callback'] call vehexam_fnc_get;
+							[
+                               '%1', %2,
+                               'You have to be quicker than that!',
+                               _callback
+                            ] call vehexam_fnc_finish;
 					", _exam_type, _examiner_pos
 				],
 				""
@@ -61,12 +61,12 @@ if(!isServer) then {
 			_bad_driving setTriggerStatements [
 				format ["_veh = [""%1"", ""veh""] call vehexam_fnc_get; !isOnRoad position _veh || (damage _veh) > 0.1", _exam_type],
 				format ["
-                                       _callback = ['%1', 'failure_callback'] call vehexam_fnc_get;                                
-         				[
-                                                '%1', %2,
-                                                ""You won't pass being reckless like that!"",
-                                                _callback
-                                        ] call vehexam_fnc_finish;
+                            _callback = ['%1', 'failure_callback'] call vehexam_fnc_get;                                
+         				    [
+                                '%1', %2,
+                                ""You won't pass being reckless like that!"",
+                                _callback
+                            ] call vehexam_fnc_finish;
 					_examinee = ['%1', ""examinee""] call vehexam_fnc_get;
 					", 
 					_exam_type, _examiner_pos

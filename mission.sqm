@@ -4,11 +4,13 @@ class Mission
 	addOns[]=
 	{
 		"A3_Characters_F_Civil",
-		"a3_map_altis"
+		"a3_map_altis",
+		"a3_characters_f_gamma"
 	};
 	addOnsAuto[]=
 	{
 		"A3_Characters_F_Civil",
+		"a3_characters_f_gamma",
 		"a3_map_altis"
 	};
 	randomSeed=3221428;
@@ -32,7 +34,7 @@ class Mission
 	};
 	class Groups
 	{
-		items=1;
+		items=2;
 		class Item0
 		{
 			side="CIV";
@@ -96,7 +98,28 @@ class Mission
 					player="PLAY CDG";
 					skill=0.60000002;
 				};
-				
+			};
+		};
+		class Item1
+		{
+			side="CIV";
+			class Vehicles
+			{
+				items=1;
+				class Item0
+				{
+					position[]={14117.053,17.181904,16439.857};
+					azimut=230;
+					special="NONE";
+					id=6;
+					side="CIV";
+					vehicle="C_man_w_worker_F";
+					leader=1;
+					skill=0.60000002;
+					text="car_license_examiner";
+					init="this addAction [""Begin Exam"", ""call vehexam_fnc_begin"", [""car_license_exam"", ""C_Offroad_01_F"", 55, 80]]; this allowDamage false; ";
+					description="Car License Examiner";
+				};
 			};
 		};
 	};
@@ -106,106 +129,107 @@ class Mission
 		class Item0
 		{
 			position[]={14116.593,17.177002,16439.008};
-			name="car_examiner1";
+			name="car_exam";
 			text="Drivers Licence Exam";
 			type="c_car";
 			colorName="ColorBlue";
 		};
 		class Item1
 		{
-			position[]={14116.402,17.170809,16443.121};
-			name="car_license_exam_spawn";
-			type="Empty";
-		};
-		class Item2
-		{
 			position[]={14137.477,17.209969,16452.719};
 			name="car_license_exam1";
 			type="Empty";
 		};
-		class Item3
+		class Item2
 		{
 			position[]={14177.606,16.889898,16464.859};
 			name="car_license_exam2";
 			type="Empty";
 		};
-		class Item4
+		class Item3
 		{
 			position[]={14205.017,16.854193,16479.871};
 			name="car_license_exam3";
 			type="Empty";
 		};
-		class Item5
+		class Item4
 		{
 			position[]={14188.84,16.647167,16498.051};
 			name="car_license_exam4";
 			type="Empty";
 		};
-		class Item6
+		class Item5
 		{
 			position[]={14167.99,16.962866,16471.424};
 			name="car_license_exam5";
 			type="Empty";
 		};
-		class Item7
+		class Item6
 		{
 			position[]={14144.254,16.886562,16474.82};
 			name="car_license_exam6";
 			type="Empty";
 		};
-		class Item8
+		class Item7
 		{
 			position[]={14172.498,16.921343,16495.5};
 			name="car_license_exam7";
 			type="Empty";
 		};
-		class Item9
+		class Item8
 		{
 			position[]={14164.328,17.093092,16506.176};
 			name="car_license_exam8";
 			type="Empty";
 		};
-		class Item10
+		class Item9
 		{
 			position[]={14126.469,16.19659,16491.111};
 			name="car_license_exam9";
 			type="Empty";
 		};
-		class Item11
+		class Item10
 		{
 			position[]={14130.083,17.032993,16468.375};
 			name="car_license_exam10";
 			type="Empty";
 		};
-		class Item12
+		class Item11
 		{
 			position[]={14108.57,16.520298,16470.82};
 			name="car_license_exam11";
 			type="Empty";
 		};
-		class Item13
+		class Item12
 		{
 			position[]={14089.279,16.830524,16446.082};
 			name="car_license_exam12";
 			type="Empty";
 		};
-		class Item14
+		class Item13
 		{
-			position[]={14113.322,17.151703,16446.221};
+			position[]={14142.034,17.202646,16453.814};
 			name="car_license_exam13";
 			type="Empty";
 		};
-		class Item15
+		class Item14
 		{
 			position[]={8414.9639,111.34189,25115.148};
 			name="respawn_civ";
 			type="Empty";
 		};
-		class Item16
+		class Item15
 		{
 			position[]={14111.47,17.160772,16437.945};
 			name="player_spawn";
 			type="Empty";
+		};
+		class Item16
+		{
+			position[]={14113.665,17.151972,16446.02};
+			name="car_license_exam_spawn";
+			type="Empty";
+			angle=80;
 		};
 	};
 };

@@ -2,12 +2,11 @@ if (!isServer) then {
 	vehicle_exam_finish_flag = _this;
 	publicVariableServer "vehicle_exam_finish_flag";
 
-} else {
-
+} else {	
 	_exam_type = _this select 0;
-	_examiner_pos = _this select 1;
-	_msg = _this select 2;
-	_callback = _this select 3;	// [function, args]
+	_examiner_pos = [_exam_type, "examiner_pos"] call vehexam_fnc_get;
+	_msg = _this select 1;
+	_callback = _this select 2;	// [function, args]
 
 	_examinee = [_exam_type, "examinee"] call vehexam_fnc_get;
 	_exam_veh = [_exam_type, "veh"] call vehexam_fnc_get;
@@ -29,5 +28,8 @@ if (!isServer) then {
 	if(_callback) then {
 		(_callback select 1) spawn (_callback select 0);
 	};
-
+		
+	{
+		deleteWaypoint _x;
+	} forEach (waypoints _examinee);	
 };

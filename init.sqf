@@ -16,7 +16,7 @@ if(!isNull player) then {
 
 [
 	"car_license_exam",  // type of exam and also prefix for checkpoints, ie. car_license_exam1, car_license_exam2, etc
-	4, // checkpoint radius
+	5, // checkpoint radius
 	"!isOnRoad position _veh || (damage _veh) > 0.1", // bad driving check
 	false, // success callback in form of [function, arguments]
 	false // failure callback in form of [function, arguments]

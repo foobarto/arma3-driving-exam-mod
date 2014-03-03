@@ -37,7 +37,9 @@ _add_checkpoint = {
                         if( str _current == str thistrigger) then {                             
                             _next_idx = _current_idx +1;
                             [""%1"", ""current_checkpoint"", _next_idx] call vehexam_fnc_set;
-                            [_examinee, ('Checkpoint '+ str _next_idx + '/' +  str (count _checkpoints))] call vehexam_fnc_hint;                    
+                            _timeout = ['%1', 'timeout_trigger'] call vehexam_fnc_get;
+                            _time_left = round (triggerTimeoutCurrent _timeout);
+                            [_examinee, ('Checkpoint '+ str _next_idx + '/' +  str (count _checkpoints) + '.  ' + str _time_left + ' seconds left!')] call vehexam_fnc_hint;                    
                         };        
                     };            
                 };
@@ -53,7 +55,7 @@ _add_checkpoint = {
             _examiner_pos = _examinee getVariable 'vehexam_examiner_pos';
             [""%1"", 'You have passed!', _callback] call vehexam_fnc_finish;
          } else {
-            (group _examinee) setCurrentWaypoint [(group _examinee), (_current_idx+1)];
+            (group _examinee) setCurrentWaypoint [(group _examinee), _current_idx];
          };
          ", _exam_type]
     ];

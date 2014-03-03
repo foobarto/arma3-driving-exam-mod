@@ -14,6 +14,8 @@ if(!isServer) then {
 	_examinee = _this select 1;
 	_examiner_pos = position _examinee;
 
+	[_examinee, format ["Go through all checkpoints in under %1 seconds!", _exam_timeout]] call vehexam_fnc_hint;
+
 	switch ([_exam_type, "examinee"] call vehexam_fnc_get) do {
 		case objNull:
 		{			
@@ -30,7 +32,7 @@ if(!isServer) then {
 				_exam_veh, 
 				[
                     "Cancel Exam",
-                    (format ["_callback = ['%1', 'failure_callback'] call vehexam_fnc_get; [""%1"", %2, 'Giving up eh?', _callback] call vehexam_fnc_finish;",
+                    (format ["_callback = ['%1', 'failure_callback'] call vehexam_fnc_get; [""%1"", 'Giving up eh?', _callback] call vehexam_fnc_finish;",
                     _exam_type, _examiner_pos]), [], 0, true, true, "GetOut"
                 ],
              	_examinee
@@ -43,6 +45,7 @@ if(!isServer) then {
 			[_exam_type, "examinee", _examinee] call vehexam_fnc_set;			
 			
 			_timeout = createTrigger ["EmptyDetector", [0,0,0]];
+			[_exam_type, "timeout_trigger", _timeout] call vehexam_fnc_set;
 			_timeout setTriggerTimeout [_exam_timeout, _exam_timeout, _exam_timeout, false];
 			_timeout setTriggerStatements [
 				"true", 
@@ -78,17 +81,18 @@ if(!isServer) then {
 
 			// set the waypoints
 			_checkpoints = [_exam_type, "checkpoints"] call vehexam_fnc_get;
-			_checkpoint_radius = [_exam_type, "checkpoint_radius"] call vehexam_fnc_get;
-			_last_waypoint = objNull;
-			{
-				deleteWaypoint _x;
-			} forEach (waypoints _examinee);
+			_checkpoint_radius = [_exam_type, "checkpoint_radius"] call vehexam_fnc_get;			
+			while {(count (waypoints _examinee)) > 0} do {
+				deleteWaypoint ((waypoints _examinee) select 0); 
+			};
 			for [{_i=1}, {_i <= count _checkpoints}, {_i = _i+1}] do {				
 				_checkpoint_pos = getMarkerPos format ["%1%2", _exam_type, _i];
-				_last_waypoint = (group _examinee) addWaypoint [_checkpoint_pos, 0];				
-				_last_waypoint setWaypointCompletionRadius 0;
+				_waypoint = (group _examinee) addWaypoint [_checkpoint_pos, 0];
+				_waypoint setWaypointCompletionRadius 0;
+				_waypoint setWaypointType "HOLD";
+				_waypoint setWaypointDescription format ["Checkpoint %1/%2", _i, (count _checkpoints)];
 			};			
-			(group _examinee) setCurrentWaypoint [(group _examinee), 1];
+			(group _examinee) setCurrentWaypoint [(group _examinee), 0];
 			[_exam_type, "examiner_pos", _examiner_pos] call vehexam_fnc_set;			
 		};
 

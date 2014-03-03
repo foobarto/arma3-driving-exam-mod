@@ -24,12 +24,12 @@ if (!isServer) then {
 	[_exam_type, "examinee", objNull] call vehexam_fnc_set;
 
 	[_examinee, _msg] call vehexam_fnc_hint;
+	[_exam_type, "timeout_trigger", nil] call vehexam_fnc_set;
 
 	if(_callback) then {
 		(_callback select 1) spawn (_callback select 0);
 	};
-		
-	{
-		deleteWaypoint _x;
-	} forEach (waypoints _examinee);	
+	while {(count (waypoints _examinee)) > 0} do {
+		deleteWaypoint ((waypoints _examinee) select 0); 
+	};
 };
